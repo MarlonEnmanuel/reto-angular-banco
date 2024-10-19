@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '../../services/products-api.models';
 
 @Component({
     selector: 'app-product-list',
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
 
+    @Input({ required: true })
+    public products!:Product[];
 }

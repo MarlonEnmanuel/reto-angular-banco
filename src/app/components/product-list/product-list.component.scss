@@ -1,0 +1,23 @@
+.product-list {
+    background-color: white;
+    padding: 1em;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    
+        thead {
+            font-weight: bold;
+            background-color: #eee;
+            text-align: left;
+        }
+    
+        tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+        th, td {
+            padding: 1rem;
+        }
+    }
+}

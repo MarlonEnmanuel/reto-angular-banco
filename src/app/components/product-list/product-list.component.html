@@ -1,1 +1,33 @@
-<p>product-list works!</p>
+<div class="product-list">
+    <table>
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>Nombre del producto</th>
+                <th>Descripción</th>
+                <th>Fecha de liberación</th>
+                <th>Fecha de reestructuración</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of products; track $index) {
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.date_release }}</td>
+                <td>{{ product.date_revision }}</td>
+                <td>...</td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    {{ products.length }} resultados
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
