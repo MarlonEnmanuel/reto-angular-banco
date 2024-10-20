@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (product of products; track $index) {
+            @for (product of pagedProducts(); track $index) {
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
@@ -24,8 +24,39 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6">
-                    {{ products.length }} resultados
+                <td colspan="4">
+                    <span>{{ products().length }} resultados</span>
+                    <span>&ensp;|&ensp;</span>
+                    <span>Página {{ currentPage() }} de {{ totalPages() }}</span>
+                    <span>&ensp;|&ensp;</span>
+                    <span>
+                        <button
+                            [disabled]="currentPage() === 1"
+                            (click)="previousPage()"
+                            >
+                            Anterior
+                        </button>
+                        &nbsp;
+                        <button
+                            [disabled]="currentPage() === totalPages()"
+                            (click)="nextPage()"
+                            >
+                            Siguiente
+                        </button>
+                    </span>
+                </td>
+                <td colspan="2" style="text-align: right;">
+                    <span>Mostrando </span>
+                    <select
+                        name="pagination"
+                        [value]="productsPerPage()"
+                        (change)="handleProductsPerPageChange($event)"
+                        >
+                        <option [value]="5">5</option>
+                        <option [value]="10">10</option>
+                        <option [value]="20">20</option>
+                    </select>
+                    <span> productos por página</span>
                 </td>
             </tr>
         </tfoot>

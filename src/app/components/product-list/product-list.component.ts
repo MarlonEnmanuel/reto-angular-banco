@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, Input, Signal, signal } from '@angular/core';
 import { Product } from '../../services/products-api.models';
 
 @Component({
@@ -11,5 +11,35 @@ import { Product } from '../../services/products-api.models';
 export class ProductListComponent {
 
     @Input({ required: true })
-    public products!:Product[];
+    public products!:Signal<Product[]>;
+
+    public productsPerPage = signal<number>(5);
+
+    public currentPage = signal<number>(1);
+
+    public totalPages = computed(() => {
+        return Math.ceil(this.products().length / this.productsPerPage());
+    });
+
+    public pagedProducts = computed(() => {
+        const start = (this.currentPage() - 1) * this.productsPerPage();
+        return this.products().slice(start, start + this.productsPerPage());
+    });
+
+    public handleProductsPerPageChange = (event: Event) => {
+        const input = event.target as HTMLSelectElement;
+        this.productsPerPage.set(Number(input.value));
+    }
+
+    public previousPage(){
+        this.currentPage.update((prev) => {
+            return prev <= 1 ? 1 : prev - 1;
+        });
+    }
+
+    public nextPage(){
+        this.currentPage.update((prev) => {
+            return prev >= this.totalPages() ? this.totalPages() : prev + 1;
+        });
+    }
 }
