@@ -41,7 +41,7 @@ export class FormService {
         }
     }
 
-    public getErrorMessages(control: FormControl) {
+    public getErrorMessages(control: AbstractControl) {
         if (!control.errors) {
             return [];
         }
@@ -52,7 +52,7 @@ export class FormService {
                 case 'maxlength': return `Máximo ${error.requiredLength} caracteres`;
                 case 'validDate': return 'Fecha incorrecta';
                 case 'todayOrFuture': return 'Debe ser igual o mayor a hoy';
-                case 'availableProduct': return 'Código de producto no disponible';
+                case 'availableProduct': return 'ID no disponible';
                 default: return 'Dato incorrecto';
             };
         });

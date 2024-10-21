@@ -1,6 +1,9 @@
-export const ProductsApiMocks = {
+import { of, throwError } from "rxjs";
+import { Product } from "./products-api.models";
 
-    getList: {
+export const ProductsDataMocks = {
+
+    getProducts: {
         res: {
             "data": [
                 {
@@ -15,7 +18,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    getOne: {
+    getProduct: {
         req: "001",
         res: {
             "id": "001",
@@ -27,7 +30,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    getOneError: {
+    getProductError: {
         req: "002",
         res: {
             "name": "NotFoundError",
@@ -36,7 +39,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    create: {
+    createProduct: {
         req: {
             "id": "001",
             "name": "Producto Nuevo",
@@ -58,7 +61,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    createError: {
+    createProductError: {
         req: {
             "id": "001",
             "name": "Producto Nuevo",
@@ -74,7 +77,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    edit: {
+    editProduct: {
         req: {
             "id": "001",
             "name": "Producto Nuevo Editado",
@@ -96,7 +99,7 @@ export const ProductsApiMocks = {
         }
     },
 
-    editError: {
+    editProductError: {
         req: {
             "id": "999",
             "name": "Producto que no existe",
@@ -112,14 +115,14 @@ export const ProductsApiMocks = {
         }
     },
 
-    delete: {
+    deleteProduct: {
         req: "001",
         res: {
             "message": "Product removed successfully"
         }
     },
 
-    deleteError: {
+    deleteProductError: {
         req: "999",
         res: {
             "name": "NotFoundError",
@@ -129,3 +132,59 @@ export const ProductsApiMocks = {
     },
 
 };
+
+export class ProductsApiMocker {
+
+    public spy = jasmine.createSpyObj('ProductsApiService', [
+        'getProducts',
+        'getProduct',
+        'existsProduct',
+        'createProduct',
+        'editProduct',
+        'deleteProduct',
+    ]);
+
+    mockGetProducts(data:Product[] = ProductsDataMocks.getProducts.res.data) {
+        this.spy.getProducts.and.returnValue(of({ data }));
+    }
+
+    mockGetProductsError() {
+        this.spy.getProducts.and.returnValue(throwError(() => ProductsDataMocks.getProductError.res));
+    }
+
+    mockGetProduct(data:Product = ProductsDataMocks.getProduct.res) {
+        this.spy.getProduct.and.returnValue(of(data));
+    }
+
+    mockGetProductError() {
+        this.spy.getProduct.and.returnValue(throwError(() => ProductsDataMocks.getProductError.res));
+    }
+
+    mockExistsProduct(data:boolean = false) {
+        this.spy.existsProduct.and.returnValue(of(data));
+    }
+
+    mockCreateProduct(data:Product = ProductsDataMocks.createProduct.res.data) {
+        this.spy.createProduct.and.returnValue(of({ data }));
+    }
+
+    mockCreateProductError() {
+        this.spy.createProduct.and.returnValue(throwError(() => ProductsDataMocks.createProductError.res));
+    }
+
+    mockEditProduct(data:Product = ProductsDataMocks.editProduct.res.data) {
+        this.spy.editProduct.and.returnValue(of({ data }));
+    }
+
+    mockEditProductError() {
+        this.spy.editProduct.and.returnValue(throwError(() => ProductsDataMocks.editProductError.res));
+    }
+
+    mockDeleteProduct(data:any = ProductsDataMocks.deleteProduct.res) {
+        this.spy.deleteProduct.and.returnValue(of(data));
+    }
+
+    mockDeleteProductError() {
+        this.spy.deleteProduct.and.returnValue(throwError(() => ProductsDataMocks.deleteProductError.res));
+    }
+}

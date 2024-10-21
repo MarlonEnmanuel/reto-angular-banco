@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ProductsApiService } from './products-api.service';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { ProductsApiMocks } from './products-api.mocks';
+import { ProductsDataMocks } from './products-api.mocks';
 
 describe('ProductsApiService', () => {
     let service: ProductsApiService;
@@ -28,7 +28,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should get products list', () => {
-        const mock = ProductsApiMocks.getList;
+        const mock = ProductsDataMocks.getProducts;
 
         service.getProducts().subscribe((response) => {
             expect(response).toBeTruthy();
@@ -43,7 +43,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should get a single product', () => {
-        const mock = ProductsApiMocks.getOne;
+        const mock = ProductsDataMocks.getProduct;
 
         service.getProduct(mock.req).subscribe((response) => {
             expect(response).toBeTruthy();
@@ -57,7 +57,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should handle error when getting a product that doesnt exist', () => {
-        const mock = ProductsApiMocks.getOneError;
+        const mock = ProductsDataMocks.getProductError;
 
         service.getProduct(mock.req).subscribe({
             next: () => fail('Expected an error, but got a response'),
@@ -86,7 +86,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should create a product', () => {
-        const mock = ProductsApiMocks.create;
+        const mock = ProductsDataMocks.createProduct;
 
         service.createProduct(mock.req).subscribe((response) => {
             expect(response).toBeTruthy();
@@ -100,7 +100,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should handle error when create a existing product', () => {
-        const mock = ProductsApiMocks.createError;
+        const mock = ProductsDataMocks.createProductError;
 
         service.createProduct(mock.req).subscribe({
             next: () => fail('Expected a response, but got an error'),
@@ -118,7 +118,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should edit a product', () => {
-        const mock = ProductsApiMocks.edit;
+        const mock = ProductsDataMocks.editProduct;
 
         service.editProduct(mock.req).subscribe((response) => {
             expect(response).toBeTruthy();
@@ -132,7 +132,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should handle error when editting a product that doesnt exist', () => {
-        const mock = ProductsApiMocks.editError;
+        const mock = ProductsDataMocks.editProductError;
 
         service.editProduct(mock.req).subscribe({
             next: () => fail('Expected a response, but got an error'),
@@ -150,7 +150,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should delete a product', () => {
-        const mock = ProductsApiMocks.delete;
+        const mock = ProductsDataMocks.deleteProduct;
 
         service.deleteProduct(mock.req).subscribe((response) => {
             expect(response).toBeTruthy();
@@ -164,7 +164,7 @@ describe('ProductsApiService', () => {
     });
 
     it('should handle error when deleting a product that doesnt exist', () => {
-        const mock = ProductsApiMocks.deleteError;
+        const mock = ProductsDataMocks.deleteProductError;
 
         service.deleteProduct(mock.req).subscribe({
             next: () => fail('Expected a response, but got an error'),

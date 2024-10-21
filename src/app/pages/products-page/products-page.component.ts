@@ -10,11 +10,11 @@ import { ConfirmationModalComponent } from "../../components/confirmation-modal/
     selector: 'app-products-page',
     standalone: true,
     imports: [
-    ProductListComponent,
-    ReactiveFormsModule,
-    RouterLink,
-    ConfirmationModalComponent
-],
+        ProductListComponent,
+        ReactiveFormsModule,
+        RouterLink,
+        ConfirmationModalComponent
+    ],
     templateUrl: './products-page.component.html',
     styleUrl: './products-page.component.scss'
 })
@@ -54,7 +54,7 @@ export class ProductsPageComponent {
     }
 
     public deleteProduct() {
-        var product = this.productToDelete();
+        const product = this.productToDelete();
         if (!product) return;
 
         this.productsApiService.deleteProduct(product.id).subscribe(() => {
