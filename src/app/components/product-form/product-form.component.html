@@ -1,1 +1,53 @@
-<p>product-form works!</p>
+<div class="product-form">
+    <form [formGroup]="form" novalidate (submit)="handleSubmit()">
+        <div class="form-grid">
+            <div [class.error]="id.errors">
+                <label for="id">ID</label>
+                <input type="text" id="id" formControlName="id">
+                @if (id.errors) {
+                    <span>{{ getErrors(id) }}</span>
+                }
+            </div>
+            <div [class.error]="name.errors">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" formControlName="name">
+                @if (name.errors) {
+                    <span>{{ getErrors(name) }}</span>
+                }
+            </div>
+            <div [class.error]="description.errors">
+                <label for="description">Descripción</label>
+                <input type="text" id="description" formControlName="description">
+                @if (description.errors) {
+                    <span>{{ getErrors(description) }}</span>
+                }
+            </div>
+            <div [class.error]="logo.errors">
+                <label for="logo">Logo</label>
+                <input type="text" id="logo" formControlName="logo">
+                @if (logo.errors) {
+                    <span>{{ getErrors(logo) }}</span>
+                }
+            </div>
+            <div [class.error]="dateRelease.errors">
+                <label for="dateRelease">Fecha de liberación</label>
+                <input type="date" id="dateRelease" formControlName="dateRelease">
+                @if (dateRelease.errors) {
+                    <span>{{ getErrors(dateRelease) }}</span>
+                }
+            </div>
+            <div [class.error]="dateRevision.errors">
+                <label for="dateRevision">Fecha de revisión</label>
+                <input type="date" id="dateRevision" formControlName="dateRevision">
+                @if (dateRevision.errors) {
+                    <span>{{ getErrors(dateRevision) }}</span>
+                }
+            </div>
+        </div>
+        <div class="form-buttons">
+            <input type="button" value="Regresar" (click)="location.back()">
+            <input type="reset" value="Reiniciar">
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+</div>

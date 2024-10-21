@@ -3,6 +3,7 @@ import { ProductsApiService } from '../../services/products-api.service';
 import { Product } from '../../services/products-api.models';
 import { ProductListComponent } from "../../components/product-list/product-list.component";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-products-page',
@@ -34,7 +35,8 @@ export class ProductsPageComponent {
     public searchInput = new FormControl<string>('', { nonNullable: true });
     
     constructor(
-        private productsApiService: ProductsApiService
+        private productsApiService: ProductsApiService,
+        public router: Router
     ) {}
 
     ngOnInit() {

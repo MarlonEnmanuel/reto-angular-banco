@@ -18,12 +18,12 @@ export class ProductsApiService {
     }
 
     public getProduct(id:string) {
-        var url = `${this.baseUrl}/${id}`;	
+        const url = `${this.baseUrl}/${id}`;	
         return this.http.get<Product>(url);
     }
 
     public existsProduct(id:string) {
-        var url = `${this.baseUrl}/verification/${id}`;	
+        const url = `${this.baseUrl}/verification/${id}`;	
         return this.http.get<boolean>(url);
     }
 
