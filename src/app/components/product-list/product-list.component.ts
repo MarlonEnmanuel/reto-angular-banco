@@ -1,10 +1,11 @@
 import { Component, computed, Input, Signal, signal } from '@angular/core';
 import { Product } from '../../services/products-api.models';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-product-list',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './product-list.component.html',
     styleUrl: './product-list.component.scss'
 })

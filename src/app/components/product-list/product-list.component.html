@@ -6,7 +6,7 @@
                 <th>Nombre del producto</th>
                 <th>Descripción</th>
                 <th>Fecha de liberación</th>
-                <th>Fecha de reestructuración</th>
+                <th>Fecha de revisión</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,7 +18,14 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.date_release }}</td>
                 <td>{{ product.date_revision }}</td>
-                <td>...</td>
+                <td>
+                    <div class="dropdown">
+                        <span>⁝</span>
+                        <ul>
+                            <li><a [routerLink]="['edit', product.id]">Editar</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
             }
         </tbody>

@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, Input, input, output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateUtils } from '../../utils/date.utils';
 import { FormService } from '../../services/form.service';
@@ -14,22 +14,47 @@ import { Location } from '@angular/common';
 })
 export class ProductFormComponent {
 
-    public form: FormGroup;
+    @Input()
+    public product?:Product;
+
+    public form!:FormGroup;
+    
     public sendProduct = output<Product>();
 
     constructor(
         private formBuilder: FormBuilder,
         private formService: FormService,
         public location: Location
-    ) {
+    ) {}
+
+    ngOnInit() {
         this.form = this.formBuilder.nonNullable.group({
-            id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)], [this.formService.availableProductValidator()]],
-            name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
-            description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-            logo: ['', [Validators.required]],
-            dateRelease: ['', [Validators.required, this.formService.validDateValidator(), this.formService.todayOrFutureValidator()]],
-            dateRevision: [{ value: '', disabled: true }],
+            id: [
+                { value: this.product?.id ?? '', disabled: !!this.product },
+                [Validators.required, Validators.minLength(3), Validators.maxLength(10)],
+                [this.formService.availableProductValidator()]
+            ],
+            name: [
+                this.product?.name ?? '',
+                [Validators.required, Validators.minLength(6), Validators.maxLength(100)]
+            ],
+            description: [
+                this.product?.description ?? '',
+                [Validators.required, Validators.minLength(10), Validators.maxLength(200)]
+            ],
+            logo: [
+                this.product?.logo ?? '',
+                [Validators.required]
+            ],
+            dateRelease: [
+                this.product?.date_release ?? '',
+                [Validators.required, this.formService.validDateValidator(), this.formService.todayOrFutureValidator()]
+            ],
+            dateRevision: [
+                { value: this.product?.date_revision ?? '', disabled: true }
+            ],
         });
+        this.suscribeDateReleaseChanges();
     }
 
     get id() { return this.form.get('id') as FormControl; }
@@ -38,10 +63,6 @@ export class ProductFormComponent {
     get logo() { return this.form.get('logo') as FormControl; }
     get dateRelease() { return this.form.get('dateRelease') as FormControl; }
     get dateRevision() { return this.form.get('dateRevision') as FormControl; }
-
-    ngOnInit() {
-        this.suscribeDateReleaseChanges();
-    }
 
     public handleSubmit() {
         this.form.markAllAsTouched();

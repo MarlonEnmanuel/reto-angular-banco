@@ -18,3 +18,5 @@ export interface ApiError {
     message:string;
     stack:string;
 }
+
+export type ApiStatus = 'initial'|'loading'|'success'|'error';
