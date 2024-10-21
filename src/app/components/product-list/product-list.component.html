@@ -14,7 +14,13 @@
             <tbody>
                 @for (product of pagedProducts(); track $index) {
                 <tr>
-                    <td>{{ product.id }}</td>
+                    <td class="logo">
+                        <img
+                            [src]="product.logo"
+                            alt="Logo del producto"
+                            onerror="this.src = '/product-default.png'"
+                            >
+                    </td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.date_release }}</td>
