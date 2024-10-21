@@ -1,4 +1,4 @@
-import { Component, computed, Input, Signal, signal } from '@angular/core';
+import { Component, computed, Input, output, Signal, signal } from '@angular/core';
 import { Product } from '../../services/products-api.models';
 import { RouterLink } from '@angular/router';
 
@@ -13,6 +13,8 @@ export class ProductListComponent {
 
     @Input({ required: true })
     public products!:Signal<Product[]>;
+
+    public onDelete = output<Product>();
 
     public productsPerPage = signal<number>(5);
 

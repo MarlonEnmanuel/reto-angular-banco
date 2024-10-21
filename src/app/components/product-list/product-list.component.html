@@ -23,6 +23,7 @@
                         <span>⁝</span>
                         <ul>
                             <li><a [routerLink]="['edit', product.id]">Editar</a></li>
+                            <li (click)="onDelete.emit(product)">Eliminar</li>
                         </ul>
                     </div>
                 </td>

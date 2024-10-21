@@ -1,17 +1,20 @@
-import { Component, computed, signal } from '@angular/core';
+ import { Component, computed, signal } from '@angular/core';
 import { ProductsApiService } from '../../services/products-api.service';
 import { Product } from '../../services/products-api.models';
 import { ProductListComponent } from "../../components/product-list/product-list.component";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 
 @Component({
     selector: 'app-products-page',
     standalone: true,
     imports: [
-        ProductListComponent,
-        ReactiveFormsModule,
-    ],
+    ProductListComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    ConfirmationModalComponent
+],
     templateUrl: './products-page.component.html',
     styleUrl: './products-page.component.scss'
 })
@@ -34,9 +37,10 @@ export class ProductsPageComponent {
 
     public searchInput = new FormControl<string>('', { nonNullable: true });
     
+    public productToDelete = signal<Product | null>(null);
+    
     constructor(
-        private productsApiService: ProductsApiService,
-        public router: Router
+        private productsApiService: ProductsApiService
     ) {}
 
     ngOnInit() {
@@ -47,5 +51,20 @@ export class ProductsPageComponent {
         this.productsApiService.getProducts().subscribe((resp) => {
             this.products.set(resp.data);
         });
+    }
+
+    public deleteProduct() {
+        var product = this.productToDelete();
+        if (!product) return;
+
+        this.productsApiService.deleteProduct(product.id).subscribe(() => {
+            this.getProducts();
+            this.productToDelete.set(null);
+        });
+    }
+
+    public getDeleteMessage() {
+        const product = this.productToDelete();
+        return product ? `¿Estás seguro de eliminar el producto "${product.name}"?` : '';
     }
 }

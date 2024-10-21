@@ -75,6 +75,11 @@ input[type="reset"] {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 .dropdown {

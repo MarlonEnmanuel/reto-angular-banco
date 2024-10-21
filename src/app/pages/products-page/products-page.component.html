@@ -11,10 +11,23 @@
                 />
         </div>
         <div>
-            <button (click)="router.navigate(['products/create'])">Agregar</button>
+            <button>
+                <a [routerLink]="['create']">Agregar</a>
+            </button>
         </div>
     </div>
 
-    <app-product-list [products]="filteredProducts" />
+    <app-product-list
+        [products]="filteredProducts"
+        (onDelete)="productToDelete.set($event)"
+        />
+
+    @if (productToDelete()) {
+        <app-confirmation-modal
+            [message]="getDeleteMessage()"
+            (onCancel)="productToDelete.set(null)"
+            (onConfirm)="deleteProduct()"
+            />
+    }
 
 </div>
