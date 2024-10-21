@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --color-primary: #FFEC01;
+    --color-secondary: #1B2D55;
+    --color-danger: #cc3333e0;
+    --color-sucess: #4abb4a;
+    --color-warning: #ffee00;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif
 }
@@ -59,8 +67,7 @@ body {
     }
 }
 
-input,
-button {
+input {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -72,13 +79,30 @@ button,
 input[type="submit"],
 input[type="button"],
 input[type="reset"] {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     border-radius: 4px;
     cursor: pointer;
-    
-    a {
-        text-decoration: none;
-        color: inherit;
+    border: none;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+
+    &.primary {
+        background-color: var(--color-primary);
+        font-weight: bold;
+    }
+    &.secondary {
+        background-color: var(--color-secondary);
+        color: white;
+    }
+    &.success {
+        background-color: var(--color-sucess);
+        color: white;
+    }
+    &.danger {
+        background-color: var(--color-danger);
+        color: white;
+    }
+    &.warning {
+        background-color: var(--color-warning);
     }
 }
 

@@ -1,6 +1,6 @@
 import { Component, computed, Input, output, Signal, signal } from '@angular/core';
 import { Product } from '../../services/products-api.models';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-product-list',
@@ -28,6 +28,10 @@ export class ProductListComponent {
         const start = (this.currentPage() - 1) * this.productsPerPage();
         return this.products().slice(start, start + this.productsPerPage());
     });
+
+    constructor(
+        public router: Router,
+    ) {}
 
     public handleProductsPerPageChange = (event: Event) => {
         const input = event.target as HTMLSelectElement;

@@ -23,7 +23,7 @@
                         <div class="dropdown">
                             <span>⁝</span>
                             <ul>
-                                <li><a [routerLink]="['edit', product.id]">Editar</a></li>
+                                <li (click)="router.navigate(['/products', 'edit', product.id])">Editar</li>
                                 <li (click)="onDelete.emit(product)">Eliminar</li>
                             </ul>
                         </div>

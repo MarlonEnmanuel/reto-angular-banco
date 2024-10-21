@@ -5,7 +5,11 @@ import { Injectable, signal } from '@angular/core';
 })
 export class AlertService {
 
-    public alerts = signal<Alert[]>([]);
+    public alerts = signal<Alert[]>([
+        { type: 'success', message: 'Welcome to the Angular Testing Course!' },
+        { type: 'error', message: 'This is an error message!' },
+        { type: 'warning', message: 'This is a warning message!' }
+    ]);
     private timeout = 10000;
 
     constructor() { }
