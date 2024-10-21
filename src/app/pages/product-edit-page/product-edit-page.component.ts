@@ -3,6 +3,7 @@ import { ProductFormComponent } from "../../components/product-form/product-form
 import { ProductsApiService } from '../../services/products-api.service';
 import { ApiStatus, Product } from '../../services/products-api.models';
 import { Router } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
     selector: 'app-product-edit-page',
@@ -22,7 +23,8 @@ export class ProductEditPageComponent {
 
     constructor(
         private productsApiService: ProductsApiService,
-        public router: Router
+        public router: Router,
+        private alertService: AlertService,
     ) { }
 
     ngOnInit() {
@@ -39,6 +41,7 @@ export class ProductEditPageComponent {
             error: (error) => {
                 console.error(error);
                 this.status.set('error');
+                this.alertService.error('Error al cargar el producto');
             }
         });
     }
@@ -49,10 +52,12 @@ export class ProductEditPageComponent {
             next: () => {
                 this.status.set('success');
                 this.router.navigate(['/products']);
+                this.alertService.success('Producto actualizado correctamente');
             },
             error: (error) => {
                 console.error(error);
                 this.status.set('error');
+                this.alertService.error('Error al actualizar el producto');
             }
         });
     }

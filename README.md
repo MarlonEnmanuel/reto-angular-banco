@@ -14,6 +14,7 @@ Características:
 - Clean code y buenas prácticas
 - Uso de responsive designe
 - UI development sin uso de librerías/frameworks
+- Alertas tipo toast
 
 ## Requisitos
 Debe tener instalado
@@ -41,7 +42,7 @@ Para levantar el ambiente de desarrollo seguir los siguientes pasos
     npm start
     ```
 
-- Abrir el navegador en [http://localhost:4200/](http://localhost:4200/)
+- Abrir en el navegador en [http://localhost:4200/](http://localhost:4200/)
 
 
 ## Ejecutar pruebas
