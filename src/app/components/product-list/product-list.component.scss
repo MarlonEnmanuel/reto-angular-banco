@@ -1,5 +1,10 @@
 .product-list {
     background-color: white;
+    overflow: auto;
+    
+    &> div {
+        min-width: 800px;
+    }
 
     table {
         width: 100%;
