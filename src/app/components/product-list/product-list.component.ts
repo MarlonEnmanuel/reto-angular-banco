@@ -32,6 +32,7 @@ export class ProductListComponent {
     public handleProductsPerPageChange = (event: Event) => {
         const input = event.target as HTMLSelectElement;
         this.productsPerPage.set(Number(input.value));
+        this.currentPage.set(1);
     }
 
     public previousPage(){
